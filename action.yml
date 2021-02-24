@@ -1,0 +1,16 @@
+name: 'Add GPR Nuget Source'
+description: 'This action will add a Nuget source'
+inputs:
+  access-token:
+    description: 'GitHub Registry Package Access Token'
+    required: true
+  org:
+    description: 'Organization'
+    required: true
+    default: 'unosquare'
+    
+runs:
+  using: 'composite'
+  steps: 
+    - run: dotnet nuget add source https://nuget.pkg.github.com/${{ inputs.org }}/index.json -n github -u unosquare -p ${{ inputs.access-token }} --store-password-in-clear-text
+      shell: bash
